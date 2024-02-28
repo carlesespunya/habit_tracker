@@ -1,41 +1,51 @@
-import { RegisterUserCommand } from './register-User.command';
-import { RegisterUserCommandHandler } from './register-User.command-handler';
-import { UserInMemoryRepository } from 'src/core/test/User/User.in-memory.repository';
-import { User } from 'src/core/domain/user/user';
-import { UserMother } from 'src/core/test/User/User.mother';
+import { RegisterUserCommand } from './register-user.command';
+import { RegisterUserCommandHandler } from './register-user.command-handler';
+import { UserInMemoryRepository } from '../../infrastructure/user/user.in-memory.repository';
+import { UserMother } from '../../test/user/user.mother';
 
 describe('RegisterUserCommandHandler', () => {
-  it('should register if theres no duplicate', () => {
-    // Given
-    const resporoty = new UserInMemoryRepository();
-    const id = '1';
-    const username = 'test';
-    const fullname = 'test';
+  const prepareScenario = () => {
+    const repository = new UserInMemoryRepository();
+    const handler = new RegisterUserCommandHandler(repository);
+    return { repository, handler };
+  };
 
-    // When
-    const user: User = new UserMother()
-      .setId(id)
-      .setUsername(username)
-      .setFullname(fullname)
-      .build();
-    const command = new RegisterUserCommand(id, username, fullname);
-    const handler = new RegisterUserCommandHandler(resporoty);
+  it('should register the user', () => {
+    const { repository, handler } = prepareScenario();
+
+    // Given
+    const user = UserMother.create();
+
+    const command = new RegisterUserCommand(
+      user.id,
+      user.username,
+      user.fullname,
+    );
 
     handler.handle(command);
 
+    expect(repository.isUserSaved(user)).toBeTruthy();
+  });
+
+  it('should throw an error if the user already exists', () => {
+    const { repository, handler } = prepareScenario();
+
+    // Given
+    const user = UserMother.create();
+    repository.withUsers([user]);
+
+    const command = new RegisterUserCommand(
+      user.id,
+      user.username,
+      user.fullname,
+    );
+
+    expect(() => handler.handle(command)).toThrow();
+  });
+
+  it('should throw an error if the user is not valid', () => {
+    // Given
+    // When
     // Then
-    expect(resporoty.isUserSaved(user)).toBe(true);
-  });
-
-  it('should throw an error if the User already exists', () => {
-    // Given
-    // When
-    //  Then
-  });
-
-  it('should throw an error if the User is not valid', () => {
-    // Given
-    // When
-    //  Then
   });
 });

@@ -1,19 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { RegisterUserCommand } from './register-User.command';
-import { UserRepository } from 'src/core/domain/User/User.repository';
-import { User } from 'src/core/domain/user/user';
+import { RegisterUserCommand } from './register-user.command';
+import { Inject, Injectable } from '@nestjs/common';
+import { UserRepository } from '../../domain/user/user.repository';
+import { User } from '../../domain/user/user';
+import { UserAlreadyExistsError } from './user-already-exists.error';
 
 @Injectable()
 export class RegisterUserCommandHandler {
-  constructor(private readonly repository: UserRepository) {}
+  constructor(
+    @Inject(UserRepository) private readonly repository: UserRepository,
+  ) {}
 
-  async handle(command: RegisterUserCommand): Promise<void> {
-    if (this.repository.findById(command.id)) {
-      throw new Error('User already exists');
+  handle(command: RegisterUserCommand) {
+    if (this.repository.findByUsername(command.username)) {
+      throw UserAlreadyExistsError.withUsername(command.username);
     }
 
-    const user = new User(command.id, command.fullname, command.Username);
+    const user = new User(command.id, command.username, command.fullname);
 
-    await this.repository.save(user);
+    this.repository.save(user);
   }
 }

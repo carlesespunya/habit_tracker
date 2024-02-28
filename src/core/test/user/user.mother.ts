@@ -1,26 +1,28 @@
-import { User } from 'src/core/domain/User/User';
+import { User } from '../../domain/user/user';
 
 export class UserMother {
-  private id: string = 'User-id';
-  private Username: string = 'Username';
+  private id: string = 'asdf';
+  private username: string = 'username';
   private fullname: string = 'fullname';
 
-  setId(id: string): UserMother {
+  withId(id: string) {
     this.id = id;
     return this;
   }
-
-  setUsername(Username: string): UserMother {
-    this.Username = Username;
+  withUsername(username: string) {
+    this.username = username;
     return this;
   }
-
-  setFullname(fullname: string): UserMother {
+  withFullname(fullname: string) {
     this.fullname = fullname;
     return this;
   }
 
   build(): User {
-    return new User(this.id, this.Username, this.fullname);
+    return new User(this.id, this.username, this.fullname);
+  }
+
+  static create(): User {
+    return new UserMother().build();
   }
 }
