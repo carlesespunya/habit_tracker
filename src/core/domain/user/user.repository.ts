@@ -1,6 +1,8 @@
-import { User } from './User';
+import { User } from './user';
 
 export interface UserRepository {
-  save(User: User): Promise<void>;
-  findById(id: string): Promise<User | null>;
+  save(user: User): void;
+  findByUsername(username: string): User | undefined;
 }
+
+export const UserRepository = Symbol('UserRepository');
