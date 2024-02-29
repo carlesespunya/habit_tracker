@@ -1,7 +1,5 @@
 # Habit Tracker
 
-## Description
-
 Welcome to a comprehensive habit tracking application designed to help users cultivate new habits and maintain existing ones, built using the powerful NestJS framework with TypeScript
 
 ## Installation
