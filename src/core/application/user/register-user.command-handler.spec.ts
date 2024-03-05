@@ -44,8 +44,12 @@ describe('RegisterUserCommandHandler', () => {
   });
 
   it('should throw an error if the user is not valid', () => {
-    // Given
-    // When
-    // Then
+    const { handler } = prepareScenario();
+
+    const user = UserMother.create();
+
+    const command = new RegisterUserCommand(user.id, '', user.fullname);
+
+    expect(() => handler.handle(command)).toThrow();
   });
 });
