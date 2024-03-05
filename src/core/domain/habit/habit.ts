@@ -1,37 +1,35 @@
-import { HabitId } from './habit-id';
-import { Frequency } from './frequency';
+import { Frequency } from './frequency'
 
 export class Habit {
-  private createdAt: Date;
-  private habitId: HabitId;
-  private frequency: Frequency;
+  private createdAt: Date
+  private lastUpdatedAt: Date
+  frequency: Frequency
 
   private constructor(
-    id: HabitId,
-    frequency: Frequency,
+    readonly id: string,
+    readonly userId: string,
     readonly name: string,
-    readonly estimatedTime: number,
+    frequency: Frequency,
   ) {
-    this.habitId = id;
-    this.frequency = frequency;
-    this.createdAt = new Date();
+    this.frequency = frequency
+    this.createdAt = new Date()
+    this.lastUpdatedAt = new Date()
   }
 
   static create(
     id: string,
+    userId: string,
     name: string,
-    frequency: number,
     frequencyType: string,
     estimatedTime: number,
     minRestTime: number,
   ): Habit {
-    const habitId = HabitId.create(id);
     const frequencyObj = Frequency.create(
-      frequency,
+      estimatedTime,
       frequencyType,
       minRestTime,
-    );
+    )
 
-    return new Habit(habitId, frequencyObj, name, estimatedTime);
+    return new Habit(id, userId, name, frequencyObj)
   }
 }

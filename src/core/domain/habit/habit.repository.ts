@@ -1,8 +1,8 @@
-import { Habit } from './habit';
+import { Habit } from './habit'
 
 export interface HabitRepository {
-  save(user: Habit): void;
-  findByName(name: string): Habit | undefined;
+  save(user: Habit): void
+  findByUserAndName(name: string, userId: string): Habit | undefined
 }
 
-export const HabitRepository = Symbol('HabitRepository');
+export const HabitRepository = Symbol('HabitRepository')
