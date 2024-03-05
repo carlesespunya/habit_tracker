@@ -1,13 +1,11 @@
-import { BaseError } from '../../error';
+import { BaseError } from '../../error'
 
 export class HabitAlreadyExistsError extends BaseError {
   private constructor(message: string) {
-    super('habit-already-exists', message);
+    super('habit-already-exists', message)
   }
 
-  static withUsername(name: string) {
-    return new HabitAlreadyExistsError(
-      `Habit with name ${name} already exists`,
-    );
+  static withName(name: string) {
+    return new HabitAlreadyExistsError(`Habit with name ${name} already exists`)
   }
 }

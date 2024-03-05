@@ -1,11 +1,24 @@
 export class CreateHabitCommand {
-  constructor(
-    readonly id: string,
-    readonly userId: string,
-    readonly name: string,
-    readonly frequency: number,
-    readonly frequencyType: string,
-    readonly estimatedTime: number,
-    readonly minRestTime: number,
-  ) {}
+  id: string
+  userId: string
+  name: string
+  frequencyType: string
+  estimatedTime: number
+  minRestTime: number
+
+  constructor(params: {
+    id: string
+    userId: string
+    name: string
+    frequencyType: string
+    estimatedTime: number
+    minRestTime: number
+  }) {
+    this.id = params.id
+    this.userId = params.userId
+    this.name = params.name
+    this.frequencyType = params.frequencyType
+    this.estimatedTime = params.estimatedTime
+    this.minRestTime = params.minRestTime
+  }
 }
