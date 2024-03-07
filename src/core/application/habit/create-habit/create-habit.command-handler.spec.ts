@@ -1,13 +1,13 @@
 import { CreateHabitCommandHandler } from './create-habit.command-handler'
-import { UserInMemoryRepository } from '../../infrastructure/in-memory/user.in-memory.repository'
-import { HabitInMemoryRepository } from '../../infrastructure/in-memory/habit.in-memory.repository'
+import { UserInMemoryRepository } from '../../../infrastructure/in-memory/user.in-memory.repository'
+import { HabitInMemoryRepository } from '../../../infrastructure/in-memory/habit.in-memory.repository'
 import { CreateHabitCommand } from './create-habit.command'
-import { UserNotFoundError } from '../user-not-found.error'
-import { UserMother } from '../../test/user/user.mother'
-import { HabitMother } from '../../test/habit/habit.mother'
-import { Habit } from '../../domain/habit/habit'
+import { UserNotFoundError } from '../../user-not-found.error'
+import { UserMother } from '../../../test/user/user.mother'
+import { HabitMother } from '../../../test/habit/habit.mother'
+import { Habit } from '../../../domain/habit/habit'
 import { HabitAlreadyExistsError } from './habit-already-exists.error'
-import { InvalidFrequencyError } from '../../domain/habit/invalid-frequency.error'
+import { InvalidFrequencyError } from '../../../domain/habit/invalid-frequency.error'
 
 describe('CreateHabitCommandHandler', () => {
   let habitRepository: HabitInMemoryRepository

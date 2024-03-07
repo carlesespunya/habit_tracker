@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { CreateHabitCommand } from './create-habit.command'
 import { HabitAlreadyExistsError } from './habit-already-exists.error'
-import { HabitRepository } from '../../domain/habit/habit.repository'
-import { Habit } from '../../domain/habit/habit'
-import { UserRepository } from '../../domain/user/user.repository'
-import { UserNotFoundError } from '../user-not-found.error'
+import { HabitRepository } from '../../../domain/habit/habit.repository'
+import { Habit } from '../../../domain/habit/habit'
+import { UserRepository } from '../../../domain/user/user.repository'
+import { UserNotFoundError } from '../../user-not-found.error'
 
 @Injectable()
 export class CreateHabitCommandHandler {

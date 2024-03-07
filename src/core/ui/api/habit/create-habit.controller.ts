@@ -1,6 +1,6 @@
-import { CreateHabitCommandHandler } from '../../../application/habit/create-habit.command-handler'
+import { CreateHabitCommandHandler } from '../../../application/habit/create-habit/create-habit.command-handler'
 import { Body, Controller, Post, Res } from '@nestjs/common'
-import { CreateHabitCommand } from '../../../application/habit/create-habit.command'
+import { CreateHabitCommand } from '../../../application/habit/create-habit/create-habit.command'
 import { v4 as uuidv4 } from 'uuid'
 import { Response } from 'express'
 import { catchError } from '../error.handler'

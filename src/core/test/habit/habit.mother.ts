@@ -1,10 +1,10 @@
 import { Habit } from '../../domain/habit/habit'
+import { v4 as uuidv4 } from 'uuid'
 
 export class HabitMother {
-  private id = 'id'
-  private userId = 'userId'
+  private id = uuidv4()
+  private userId = uuidv4()
   private name = 'name'
-  private frequency = 1
   private frequencyType = 'daily'
   private estimatedTime = 1
   private minRestTime = 1
