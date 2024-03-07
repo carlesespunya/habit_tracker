@@ -1,9 +1,11 @@
-import { Frequency } from './frequency'
+import { Frequency } from './frequency/frequency'
+import { Progress } from './progress/progress'
 
 export class Habit {
   private createdAt: Date
   private lastUpdatedAt: Date
   frequency: Frequency
+  progress: Progress[] = []
 
   private constructor(
     readonly id: string,
@@ -31,5 +33,11 @@ export class Habit {
     )
 
     return new Habit(id, userId, name, frequencyObj)
+  }
+
+  createProgress(id: string, date: Date, observations: string) {
+    const progress = Progress.create(id, date, observations)
+
+    this.progress.push(progress)
   }
 }

@@ -7,7 +7,7 @@ import { UserMother } from '../../../test/user/user.mother'
 import { HabitMother } from '../../../test/habit/habit.mother'
 import { Habit } from '../../../domain/habit/habit'
 import { HabitAlreadyExistsError } from './habit-already-exists.error'
-import { InvalidFrequencyError } from '../../../domain/habit/invalid-frequency.error'
+import { InvalidFrequencyError } from '../../../domain/habit/frequency/invalid-frequency.error'
 
 describe('CreateHabitCommandHandler', () => {
   let habitRepository: HabitInMemoryRepository
