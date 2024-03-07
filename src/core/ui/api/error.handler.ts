@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import { UserAlreadyExistsError } from '../../application/user/user-already-exists.error'
 import { BaseError } from '../../error'
-import { HabitAlreadyExistsError } from '../../application/habit/habit-already-exists.error'
+import { HabitAlreadyExistsError } from '../../application/habit/create-habit/habit-already-exists.error'
 import { UserNotFoundError } from '../../application/user-not-found.error'
 
 export class ErrorResponse {

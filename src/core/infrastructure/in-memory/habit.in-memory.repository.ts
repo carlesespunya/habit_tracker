@@ -14,6 +14,10 @@ export class HabitInMemoryRepository implements HabitRepository {
     )
   }
 
+  findByUserId(userId: string): Habit[] {
+    return this.habits.filter((habit) => habit.userId === userId)
+  }
+
   addHabits(habits: Habit[]): HabitInMemoryRepository {
     this.habits.push(...habits)
     return this

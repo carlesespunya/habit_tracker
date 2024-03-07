@@ -1,4 +1,4 @@
-import { BaseError } from '../../error'
+import { BaseError } from '../../../error'
 
 export class HabitAlreadyExistsError extends BaseError {
   private constructor(message: string) {

@@ -1,7 +1,8 @@
 import { User } from '../../domain/user/user'
+import { v4 as uuidv4 } from 'uuid'
 
 export class UserMother {
-  private id: string = 'id'
+  private id: string = uuidv4()
   private username: string = 'username'
   private fullname: string = 'fullname'
 
