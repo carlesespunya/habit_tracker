@@ -36,4 +36,23 @@ export class Frequency {
 
     return !(time < min || minRestTime < min || total >= max)
   }
+
+  minDateForGoal(startDate: Date, goal: number): Date {
+    const minDate = new Date(startDate)
+    const neededTime = (this.time + this.minRestTime) * goal
+
+    switch (this.type) {
+      case 'daily':
+        minDate.setHours(minDate.getHours() + neededTime)
+        break
+      case 'weekly':
+        minDate.setDate(minDate.getDate() + neededTime * 7)
+        break
+      case 'monthly':
+        minDate.setMonth(minDate.getMonth() + neededTime)
+        break
+    }
+
+    return minDate
+  }
 }

@@ -1,3 +1,5 @@
+import { Challenge } from './challenge/challenge'
+import { InvalidChallengeError } from './challenge/invalid-challenge.error'
 import { Frequency } from './frequency/frequency'
 import { Progress } from './progress/progress'
 
@@ -6,6 +8,7 @@ export class Habit {
   private lastUpdatedAt: Date
   frequency: Frequency
   progress: Progress[] = []
+  challenges: Challenge[] = []
 
   private constructor(
     readonly id: string,
@@ -46,5 +49,38 @@ export class Habit {
     const progress = Progress.create(id, date, observations, validated)
 
     this.progress.push(progress)
+  }
+
+  createChallenge(
+    id: string,
+    description: string,
+    goal: number,
+    startDate: Date,
+    endDate: Date,
+  ) {
+    this.validatePossibleChallenge(startDate, endDate, goal)
+
+    const challenge = Challenge.create(
+      id,
+      description,
+      goal,
+      startDate,
+      endDate,
+    )
+
+    this.challenges.push(challenge)
+  }
+
+  private validatePossibleChallenge(
+    startDate: Date,
+    endDate: Date,
+    goal: number,
+  ) {
+    if (this.frequency.minDateForGoal(startDate, goal) > endDate)
+      throw InvalidChallengeError.withStartDateEndDateAndGoal(
+        startDate,
+        endDate,
+        goal,
+      )
   }
 }
