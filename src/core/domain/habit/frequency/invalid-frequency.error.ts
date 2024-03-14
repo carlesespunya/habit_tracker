@@ -1,4 +1,4 @@
-import { BaseError } from '../../error'
+import { BaseError } from '../../../error'
 
 export class InvalidFrequencyError extends BaseError {
   private constructor(message: string) {

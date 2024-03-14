@@ -8,6 +8,10 @@ export class HabitInMemoryRepository implements HabitRepository {
     this.habits.push(habit)
   }
 
+  findById(id: string): Habit | undefined {
+    return this.habits.find((habit) => habit.id === id)
+  }
+
   findByUserAndName(name: string, userId: string): Habit | undefined {
     return this.habits.find(
       (habit) => habit.name === name && habit.userId === userId,

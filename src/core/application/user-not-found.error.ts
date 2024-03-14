@@ -8,8 +8,4 @@ export class UserNotFoundError extends BaseError {
   static withId(userId: string): UserNotFoundError {
     return new UserNotFoundError(`User with id ${userId} not found`)
   }
-
-  static missingUserId(): UserNotFoundError {
-    return new UserNotFoundError('Missing user id')
-  }
 }
