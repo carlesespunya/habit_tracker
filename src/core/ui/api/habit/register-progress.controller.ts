@@ -6,7 +6,6 @@ import { RegisterProgressCommandHandler } from '../../../application/habit/regis
 import { RegisterProgressCommand } from '../../../application/habit/register-progress/register-progress.command'
 
 export class RegisterProgressDto {
-  id: string
   habitId: string
   date: Date
   observations: string
