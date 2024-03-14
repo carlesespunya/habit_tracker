@@ -64,5 +64,6 @@ function createCommandFromProgressAndHabitId(
     habitId: habitId,
     date: progress.date,
     observations: progress.observations,
+    validated: progress.validated,
   })
 }
