@@ -10,6 +10,7 @@ export class RegisterProgressDto {
   habitId: string
   date: Date
   observations: string
+  validated: boolean
 }
 
 @Controller()
@@ -28,6 +29,7 @@ export class RegisterProgressController {
           habitId: request.habitId,
           date: request.date,
           observations: request.observations,
+          validated: request.validated,
         }),
       )
     } catch (error) {

@@ -27,6 +27,7 @@ export class CreateHabitCommandHandler {
       command.frequencyType,
       command.estimatedTime,
       command.minRestTime,
+      command.wearableDeviceId,
     )
 
     this.repository.save(habit)

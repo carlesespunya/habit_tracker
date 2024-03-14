@@ -12,7 +12,12 @@ export class RegisterProgressCommandHandler {
 
     if (!habit) throw HabitNotFoundError.withId(command.habitId)
 
-    habit.createProgress(command.id, command.date, command.observations)
+    habit.createProgress(
+      command.id,
+      command.date,
+      command.observations,
+      command.validated,
+    )
 
     this.repository.save(habit)
   }

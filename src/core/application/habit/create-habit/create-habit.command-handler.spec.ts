@@ -119,6 +119,30 @@ describe('CreateHabitCommandHandler', () => {
       expect(habitRepository.habits).toHaveLength(0)
     })
   })
+
+  describe('When the habit is valid, the user exists and it has a wearableId', () => {
+    const habit = new HabitMother()
+      .withWearableDeviceId('wearableDeviceId')
+      .build()
+    const user = new UserMother().withId(habit.userId).build()
+    const command = createCommandFromHabit(habit)
+
+    beforeEach(() => {
+      userRepository.addUsers([user])
+    })
+
+    it('should save the habit', () => {
+      commandHandler.handle(command)
+
+      expect(habitRepository.isHabitSaved(habit)).toBeTruthy()
+    })
+
+    it('the habit should have a wearable id', () => {
+      commandHandler.handle(command)
+
+      expect(habit.wearableDeviceId).toEqual('wearableDeviceId')
+    })
+  })
 })
 
 function createCommandFromHabit(habit: Habit): CreateHabitCommand {

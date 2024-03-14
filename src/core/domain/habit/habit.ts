@@ -12,6 +12,7 @@ export class Habit {
     readonly userId: string,
     readonly name: string,
     frequency: Frequency,
+    readonly wearableDeviceId?: string,
   ) {
     this.frequency = frequency
     this.createdAt = new Date()
@@ -25,6 +26,7 @@ export class Habit {
     frequencyType: string,
     estimatedTime: number,
     minRestTime: number,
+    wearableDeviceId?: string,
   ): Habit {
     const frequencyObj = Frequency.create(
       estimatedTime,
@@ -32,11 +34,16 @@ export class Habit {
       minRestTime,
     )
 
-    return new Habit(id, userId, name, frequencyObj)
+    return new Habit(id, userId, name, frequencyObj, wearableDeviceId)
   }
 
-  createProgress(id: string, date: Date, observations: string) {
-    const progress = Progress.create(id, date, observations)
+  createProgress(
+    id: string,
+    date: Date,
+    observations: string,
+    validated: boolean,
+  ) {
+    const progress = Progress.create(id, date, observations, validated)
 
     this.progress.push(progress)
   }

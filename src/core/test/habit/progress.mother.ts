@@ -5,9 +5,15 @@ export class ProgressMother {
   private id = uuidv4()
   private date = new Date()
   private observations = 'observations'
+  private validated = false
 
   build(): Progress {
-    return Progress.create(this.id, this.date, this.observations)
+    return Progress.create(
+      this.id,
+      this.date,
+      this.observations,
+      this.validated,
+    )
   }
 
   static create(): Progress {

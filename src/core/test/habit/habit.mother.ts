@@ -8,6 +8,7 @@ export class HabitMother {
   private frequencyType = 'daily'
   private estimatedTime = 1
   private minRestTime = 1
+  private wearableDeviceId = null
 
   build(): Habit {
     return Habit.create(
@@ -17,6 +18,7 @@ export class HabitMother {
       this.frequencyType,
       this.estimatedTime,
       this.minRestTime,
+      this.wearableDeviceId,
     )
   }
 
@@ -26,6 +28,11 @@ export class HabitMother {
 
   withId(id: string) {
     this.id = id
+    return this
+  }
+
+  withWearableDeviceId(wearableDeviceId: string) {
+    this.wearableDeviceId = wearableDeviceId
     return this
   }
 }
