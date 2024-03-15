@@ -2,6 +2,7 @@ import { Challenge } from './challenge/challenge'
 import { InvalidChallengeError } from './challenge/invalid-challenge.error'
 import { Frequency } from './frequency/frequency'
 import { Progress } from './progress/progress'
+import { InvalidReminderError } from './reminder/invalid-reminder.error'
 import { Reminder } from './reminder/reminder'
 
 export class Habit {
@@ -74,6 +75,12 @@ export class Habit {
   }
 
   addReminder(id: string, message: string, status: string, hour: number) {
+    if (this.reminders.some((reminder) => reminder.hour === hour))
+      throw InvalidReminderError.repeatedFroHabit(this.id)
+
+    if (this.reminders.length === 3)
+      throw InvalidReminderError.maxRemindersForHabitId(this.id)
+
     const reminder = Reminder.create(id, message, status, hour)
 
     this.reminders.push(reminder)

@@ -59,6 +59,42 @@ describe('AddReminderCommandHandler', () => {
       ).toThrowError(InvalidReminderError.withStatus())
     })
   })
+
+  describe('When the reminder is repeated', () => {
+    const habit = HabitMother.create()
+    const reminder = ReminderMother.create()
+    const command = createCommandFromReminderAndHabitId(reminder, habit.id)
+
+    beforeEach(() => {
+      habitRepository.save(habit)
+      commandHandler.handle(command)
+    })
+
+    it('should throw a invalid reminder error', () => {
+      expect(() => commandHandler.handle(command)).toThrowError(
+        InvalidReminderError.repeatedFroHabit(habit.id),
+      )
+    })
+  })
+
+  describe('When the habit has reached the maximum number of reminders', () => {
+    const habit = HabitMother.create()
+    const reminder = ReminderMother.create()
+    const command = createCommandFromReminderAndHabitId(reminder, habit.id)
+
+    beforeEach(() => {
+      habitRepository.save(habit)
+      habit.addReminder('2', 'message', 'active', 10)
+      habit.addReminder('3', 'message', 'active', 11)
+      habit.addReminder('4', 'message', 'active', 12)
+    })
+
+    it('should throw a invalid reminder error', () => {
+      expect(() => commandHandler.handle(command)).toThrowError(
+        InvalidReminderError.maxRemindersForHabitId(habit.id),
+      )
+    })
+  })
 })
 
 function createCommandFromReminderAndHabitId(

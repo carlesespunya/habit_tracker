@@ -16,4 +16,16 @@ export class InvalidReminderError extends BaseError {
       `The reminder status can only be active or inactive.`,
     )
   }
+
+  static repeatedFroHabit(habitId: string) {
+    return new InvalidReminderError(
+      `The reminder is already set for this habit, with id: ${habitId}`,
+    )
+  }
+
+  static maxRemindersForHabitId(habitId: string) {
+    return new InvalidReminderError(
+      `The habit has reached the maximum number of reminders, with id: ${habitId}`,
+    )
+  }
 }
