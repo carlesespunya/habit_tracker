@@ -2,6 +2,7 @@ import { Challenge } from './challenge/challenge'
 import { InvalidChallengeError } from './challenge/invalid-challenge.error'
 import { Frequency } from './frequency/frequency'
 import { Progress } from './progress/progress'
+import { Reminder } from './reminder/reminder'
 
 export class Habit {
   private createdAt: Date
@@ -9,6 +10,7 @@ export class Habit {
   frequency: Frequency
   progress: Progress[] = []
   challenges: Challenge[] = []
+  reminders: Reminder[] = []
 
   private constructor(
     readonly id: string,
@@ -69,6 +71,12 @@ export class Habit {
     )
 
     this.challenges.push(challenge)
+  }
+
+  addReminder(id: string, message: string, status: string, hour: number) {
+    const reminder = Reminder.create(id, message, status, hour)
+
+    this.reminders.push(reminder)
   }
 
   private validatePossibleChallenge(
